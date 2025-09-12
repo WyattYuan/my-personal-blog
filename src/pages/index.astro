@@ -1,49 +1,154 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 ---
 
 <!doctype html>
 <html lang="cn">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			/* Additional Homepage Styles */
+			.fold-content-container {
+				margin-bottom: 48px;
+			}
+
+			.fold-content {
+				margin-bottom: 48px;
+			}
+
+			.projects-section {
+				grid-column-gap: 32px;
+				grid-row-gap: 32px;
+				flex-direction: column;
+				display: flex;
+			}
+
+			.tech-tools-container {
+				flex-direction: column;
+				justify-content: flex-end;
+				display: flex;
+			}
+		</style>
 	</head>
 	<body>
-		<Header />
-		<main>
-			<!-- <h1>🧑‍🚀 Hello, I am Wyatt Yuan!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p> -->
-		</main>
-		<Footer />
+		<div class="content">
+			<Header selectedItem="home" />
+			<nav class="main">
+				<div class="container">
+					<main class="fold-content-container">
+						<div class="fold-content">
+							<h1>Hi, 我是 Wyatt Yuan.<br />我构建数字世界的解决方案.</h1>
+							<p class="lead">
+								经验丰富的软件工程师和技术架构师。一个积极主动的团队成员，致力于持续学习、解决问题，并帮助团队取得更快的成果。
+							</p>
+						</div>
+						<a href="mailto:Wyatt049@outlook.com" class="button">联系我</a>
+					</main>
+
+					<div class="projects-section">
+						<!-- 编程技术 -->
+						<a href="/blog" class="projects-container">
+							<div class="single-projects-category">
+								<div class="projects-category-image-container">
+									<svg
+										class="projects-category-image"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
+										></path>
+									</svg>
+								</div>
+							</div>
+							<div class="single-projects-content">
+								<h4>编程技术</h4>
+								<div class="tech-tools-container">
+									<div class="mini-label-white gray-color">技术 & 工具</div>
+									<div class="chips-container chips-container-small-width">
+										<div class="single-chip small-chip">TypeScript</div>
+										<div class="single-chip small-chip">React</div>
+										<div class="single-chip small-chip">Node.js</div>
+										<div class="single-chip small-chip">Python</div>
+										<div class="single-chip small-chip">Vue.js</div>
+										<div class="single-chip small-chip">PostgreSQL</div>
+										<div class="single-chip small-chip">MongoDB</div>
+										<div class="single-chip small-chip">GraphQL</div>
+									</div>
+								</div>
+							</div>
+						</a>
+
+						<!-- 系统架构 -->
+						<a href="/blog" class="projects-container">
+							<div class="single-projects-category">
+								<div class="projects-category-image-container">
+									<svg
+										class="projects-category-image"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"
+										></path>
+									</svg>
+								</div>
+							</div>
+							<div class="single-projects-content">
+								<h4>系统架构 &amp; 设计</h4>
+								<div class="tech-tools-container">
+									<div class="mini-label-white gray-color">技术 &amp; 工具</div>
+									<div class="chips-container chips-container-small-width">
+										<div class="single-chip small-chip">微服务</div>
+										<div class="single-chip small-chip">Docker</div>
+										<div class="single-chip small-chip">Kubernetes</div>
+										<div class="single-chip small-chip">Redis</div>
+										<div class="single-chip small-chip">Nginx</div>
+										<div class="single-chip small-chip">Jenkins</div>
+										<div class="single-chip small-chip">AWS</div>
+										<div class="single-chip small-chip">DevOps</div>
+									</div>
+								</div>
+							</div>
+						</a>
+
+						<!-- 个人项目 -->
+						<a href="/blog" class="projects-container">
+							<div class="single-projects-category">
+								<div class="projects-category-image-container">
+									<svg
+										class="projects-category-image"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											d="M12,2L13.09,8.26L22,9L13.09,9.74L12,16L10.91,9.74L2,9L10.91,8.26L12,2M12,21L10.91,14.74L2,14L10.91,13.26L12,7L13.09,13.26L22,14L13.09,14.74L12,21Z"
+										></path>
+									</svg>
+								</div>
+							</div>
+							<div class="single-projects-content">
+								<h4>个人项目</h4>
+								<div class="tech-tools-container">
+									<div class="mini-label-white gray-color">技术 &amp; 工具</div>
+									<div class="chips-container chips-container-small-width">
+										<div class="single-chip small-chip">Astro</div>
+										<div class="single-chip small-chip">Svelte</div>
+										<div class="single-chip small-chip">Rust</div>
+										<div class="single-chip small-chip">Go</div>
+										<div class="single-chip small-chip">WebAssembly</div>
+										<div class="single-chip small-chip">Three.js</div>
+										<div class="single-chip small-chip">AI/ML</div>
+										<div class="single-chip small-chip">区块链</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</nav>
+		</div>
 	</body>
 </html>

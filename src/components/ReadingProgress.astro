@@ -1,0 +1,95 @@
+---
+// Reading Progress Component
+// A minimal reading progress bar for blog posts
+---
+
+<div id="reading-progress" class="reading-progress">
+  <div class="reading-progress-bar"></div>
+</div>
+
+<style>
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--border-light);
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+  }
+
+  .reading-progress-bar {
+    height: 100%;
+    background: var(--gradient-warm);
+    width: 0%;
+    transition: width 0.1s ease-out;
+    border-radius: 0 2px 2px 0;
+    box-shadow: var(--glow);
+  } /* Hide on very small screens */
+  @media (max-width: 480px) {
+    .reading-progress {
+      height: 2px;
+    }
+  }
+</style>
+
+<script>
+  // Reading progress functionality
+  function initReadingProgress() {
+    const progressBar = document.querySelector(
+      ".reading-progress-bar",
+    ) as HTMLElement;
+    const progressContainer = document.querySelector(
+      ".reading-progress",
+    ) as HTMLElement;
+
+    if (!progressBar || !progressContainer) return;
+
+    let ticking = false;
+
+    function updateProgress() {
+      const windowHeight = window.innerHeight;
+      const documentHeight =
+        document.documentElement.scrollHeight - windowHeight;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      // Calculate progress percentage
+      const progress = Math.min((scrollTop / documentHeight) * 100, 100);
+
+      // Update progress bar width
+      progressBar.style.width = `${progress}%`;
+
+      // Show/hide progress bar based on scroll position
+      if (scrollTop > 100) {
+        progressContainer.style.opacity = "1";
+      } else {
+        progressContainer.style.opacity = "0";
+      }
+
+      ticking = false;
+    }
+
+    function requestUpdateProgress() {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    }
+
+    // Initialize on load
+    updateProgress();
+
+    // Listen for scroll events
+    window.addEventListener("scroll", requestUpdateProgress, { passive: true });
+    window.addEventListener("resize", requestUpdateProgress, { passive: true });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initReadingProgress);
+  } else {
+    initReadingProgress();
+  }
+</script>
