@@ -10,7 +10,14 @@ type Props = CollectionEntry<"blog">["data"] & {
 	selectedItem?: string;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, selectedItem = "blog" } = Astro.props;
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	heroImage,
+	selectedItem = "blog",
+} = Astro.props;
 ---
 
 <html lang="cn">
