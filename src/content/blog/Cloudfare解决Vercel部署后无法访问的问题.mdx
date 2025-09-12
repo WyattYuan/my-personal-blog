@@ -5,7 +5,7 @@ pubDate: '2025-09-12'
 heroImage: '../../assets/blue.jpg'
 ---
 
-> 最近用Github Education白嫖了name.com的一个一年域名，一开始我按照vercel官方文档部署，发现国内无法直连。故在网上搜索一番，发现可以通过Cloudfare来解决这个问题。但网上的教程大多比较老旧。经过一番摸索，终于成功解决了这个问题。下面就分享一下我的解决方案。
+> 最近用Github Education白嫖了name.com的一个一年域名，一开始我按照vercel官方文档部署，发现国内无法直连。故在网上搜索一番，发现可以通过Cloudfare来解决这个问题，下面分享一下我的解决方案。
 
 ## 第一步：将你的域名添加到 Cloudflare
 
@@ -39,7 +39,7 @@ heroImage: '../../assets/blue.jpg'
    ```
    Type: A
    Name: @ （代表你的根域名 your-domain.com）
-   IPv4 address: 76.76.21.21
+   IPv4 address: 76.223.126.88
    Proxy status: 确保云朵图标是橙色的（Proxied），表示流量会经过 Cloudflare 的 CDN。
    ```
 
@@ -74,3 +74,10 @@ heroImage: '../../assets/blue.jpg'
 ---
 
 完成以上所有步骤后，等待几分钟，你的网站应该就可以通过自定义域名在国内顺畅访问了。
+
+**参考文献：**
+1. [使用Vercel免费部署上线你的前端项目，并使用Cloudfare解决 Vercel 部署网站在国内被墙的问题](https://juejin.cn/post/7383894687302434825)
+2. [Vercel域名加速](https://docs.tangly1024.com/article/vercel-accelerate)
+3. [enhanced-FaaS-in-China
+](https://github.com/xingpingcn/enhanced-FaaS-in-China)
+4. [推一下 Vercel 加速节点](https://www.yt-blog.top/9952/)
