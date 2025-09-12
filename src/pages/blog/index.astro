@@ -222,10 +222,13 @@ const posts = (await getCollection("blog")).sort(
 												<div class="post-description">
 													{post.data.description}
 												</div>
-												<div class="post-tags">
-													<div class="post-tag">技术</div>
-													<div class="post-tag">教程</div>
-												</div>
+												{post.data.tags && post.data.tags.length > 0 && (
+													<div class="post-tags">
+														{post.data.tags.map((tag) => (
+															<div class="post-tag">{tag}</div>
+														))}
+													</div>
+												)}
 											</a>
 										</div>
 									))

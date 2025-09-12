@@ -3,6 +3,7 @@ title: '美化 PowerShell 终端：打造高效且赏心悦目的命令行环境
 description: '在现代开发中，命令行终端不仅是执行任务的工具，更是开发者日常工作的重要伙伴。一个美观且功能强大的终端环境可以显著提升工作效率和用户体验。本文将介绍如何通过安装和配置一系列工具，来美化你的 PowerShell 终端，使其既高效又赏心悦目。'
 pubDate: '2025-09-12'
 heroImage: '../../assets/blue.jpg'
+tags: ['PowerShell', '终端美化', '开发工具', 'Windows']
 ---
 
 

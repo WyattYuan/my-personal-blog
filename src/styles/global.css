@@ -141,9 +141,7 @@ a:hover {
 .main {
 	width: 100%;
 	height: 100%;
-	background-image: linear-gradient(rgba(28, 28, 28, 0.64), rgba(28, 28, 28, 0.64)), url('./grid-top-right.svg'), linear-gradient(rgba(28, 28, 28, 0.24), rgba(28, 28, 28, 0.24));
-	background-position: 0 0, 0 0, 0 0;
-	background-size: auto, auto 1130px, auto;
+	background: linear-gradient(rgba(28, 28, 28, 0.64), rgba(28, 28, 28, 0.24));
 	flex-direction: column;
 	align-items: center;
 	padding: 46px 48px 82px;
@@ -256,78 +254,7 @@ a:hover {
 	color: var(--text-primary);
 }
 
-/* Cards and Projects */
-.projects-container {
-	grid-column-gap: 24px;
-	grid-row-gap: 24px;
-	align-items: stretch;
-	text-decoration: none;
-	display: flex;
-	margin-bottom: 32px;
-	transition: all var(--transition-smooth);
-}
-
-.projects-container:hover {
-	transform: translateY(-2px);
-}
-
-.single-projects-category {
-	display: flex;
-}
-
-.projects-category-image-container {
-	min-height: 180px;
-	min-width: 180px;
-	backdrop-filter: blur(4px);
-	background-color: rgba(53, 53, 53, 0.12);
-	border: 1px solid #000;
-	border-radius: var(--border-radius-lg);
-	justify-content: center;
-	align-items: center;
-	display: flex;
-	box-shadow: var(--shadow-sm);
-}
-
-.projects-category-image {
-	width: 82px;
-	height: 82px;
-}
-
-.single-projects-content {
-	flex-direction: column;
-	justify-content: center;
-	display: flex;
-	padding-left: 24px;
-}
-
 /* Chips and Tags */
-.chips-container {
-	grid-column-gap: 12px;
-	grid-row-gap: 12px;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	margin-top: 8px;
-	display: flex;
-}
-
-.chips-container.chips-container-small-width {
-	max-width: 380px;
-}
-
-.single-chip {
-	color: var(--chip-text);
-	background-color: var(--chip-bg);
-	border-radius: var(--border-radius);
-	padding: 8px 12px;
-	font-family: 'IBM Plex Mono', sans-serif;
-	font-size: 12px;
-}
-
-.single-chip.small-chip {
-	padding: 4px 8px;
-	font-size: 10px;
-}
-
 /* Content Typography */
 .lead {
 	max-width: 580px;
@@ -478,57 +405,4 @@ a:hover {
 		grid-column-gap: 68px;
 		grid-row-gap: 68px;
 	}
-
-	.projects-container {
-		flex-direction: column;
-	}
-
-	.projects-category-image-container {
-		min-height: 124px;
-		min-width: 124px;
-		margin-bottom: -42px;
-		position: relative;
-	}
-
-	.single-projects-content {
-		padding-left: 0;
-		padding-top: 24px;
-	}
-}
-
-/* Utility Classes */
-.text-center {
-	text-align: center;
-}
-
-.mb-1 {
-	margin-bottom: 0.5rem;
-}
-
-.mb-2 {
-	margin-bottom: 1rem;
-}
-
-.mb-3 {
-	margin-bottom: 1.5rem;
-}
-
-.mb-4 {
-	margin-bottom: 2rem;
-}
-
-.mt-1 {
-	margin-top: 0.5rem;
-}
-
-.mt-2 {
-	margin-top: 1rem;
-}
-
-.mt-3 {
-	margin-top: 1.5rem;
-}
-
-.mt-4 {
-	margin-top: 2rem;
 }
