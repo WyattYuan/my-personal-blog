@@ -6,33 +6,87 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 <!doctype html>
 <html lang="cn">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			/* Additional Homepage Styles */
-			.fold-content-container {
-				margin-bottom: 48px;
-			}
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      /* macOS Style Homepage */
+      .fold-content-container {
+        margin-bottom: 48px;
+        animation: fadeIn 0.8s var(--transition-elegant);
+      }
 
-			.fold-content {
-				margin-bottom: 48px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="content">
-			<Header selectedItem="home" />
-			<nav class="main">
-				<div class="container">
-					<main class="fold-content-container">
-						<div class="fold-content">
-							<h1>Hi, 我是 Wyatt Yuan.</h1>
-							<p class="lead">No content available here yet.</p>
-						</div>
-						<a href="mailto:Wyatt049@outlook.com" class="button">联系我</a>
-					</main>
-				</div>
-			</nav>
-		</div>
-	</body>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fold-content {
+        margin-bottom: 48px;
+        padding: 3rem;
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--blur-amount)) saturate(var(--blur-saturate));
+        border-radius: var(--border-radius-xl);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow-lg);
+        transition: all var(--transition-elegant);
+      }
+
+      .fold-content:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--border-secondary);
+      }
+
+      .fold-content h1 {
+        background: linear-gradient(
+          135deg,
+          var(--accent-secondary) 0%,
+          var(--accent) 50%,
+          var(--text-primary) 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .fold-content .lead {
+        font-size: 18px;
+        line-height: 1.8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <Header selectedItem="home" />
+      <nav class="main">
+        <div class="container">
+          <main class="fold-content-container">
+            <div class="fold-content">
+              <h1>Hi, 我是 Wyatt Yuan.</h1>
+              <p class="lead">No content available here yet.</p>
+            </div>
+            <a href="mailto:Wyatt049@outlook.com" class="button">联系我</a>
+          </main>
+        </div>
+      </nav>
+    </div>
+  </body>
 </html>
