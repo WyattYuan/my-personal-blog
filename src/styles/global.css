@@ -3,11 +3,11 @@
   Glassmorphism + Big Sur aesthetic with smooth animations
 */
 
-/* Import IBM Plex fonts (SF Pro alternative) */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+/* Import Noto Sans SC (思源黑体) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@200;400;600&display=swap');
 
 html {
-	font-family: 'IBM Plex Sans', sans-serif;
+	font-family: 'Noto Sans SC', 'Source Han Sans SC', 'Source Han Sans CN', sans-serif;
 	height: 100%;
 
 	/* macOS Light Theme - Clean & Modern */
@@ -23,9 +23,9 @@ html {
 	--border-highlight: rgba(63, 193, 201, 0.5);
 
 	/* Text colors */
-	--text-primary: #364F6B;
-	--text-secondary: #5c7a9d;
-	--text-muted: #8fa3bb;
+	--text-primary: #1a1a1a;
+	--text-secondary: #4a4a4a;
+	--text-muted: #6a6a6a;
 
 	/* Custom Accent colors */
 	--accent: #3FC1C9;
