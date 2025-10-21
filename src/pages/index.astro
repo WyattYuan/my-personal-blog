@@ -71,6 +71,67 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
         font-size: 18px;
         line-height: 1.8;
       }
+
+      /* Contact Button - Same style as social links */
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2rem;
+        color: var(--text-secondary);
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius-lg);
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        box-shadow: var(--shadow-sm);
+        transition: all var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .button::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(63, 193, 201, 0.2);
+        transform: translate(-50%, -50%);
+        transition: none;
+        opacity: 0;
+      }
+
+      .button:hover::before {
+        width: 300px;
+        height: 300px;
+        opacity: 1;
+        transition:
+          width 0.6s,
+          height 0.6s,
+          opacity 0.3s;
+      }
+
+      .button:hover {
+        color: #ffffff;
+        background: linear-gradient(
+          135deg,
+          var(--accent),
+          var(--accent-secondary)
+        );
+        border-color: var(--accent);
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 8px 24px rgba(63, 193, 201, 0.4);
+      }
+
+      .button:active {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 4px 12px rgba(63, 193, 201, 0.3);
+      }
     </style>
   </head>
   <body>
