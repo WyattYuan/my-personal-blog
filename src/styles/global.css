@@ -358,19 +358,6 @@ a:hover {
 	overflow: hidden;
 }
 
-.nav-link-container::before {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 3px;
-	height: 0;
-	background: var(--accent);
-	border-radius: 0 2px 2px 0;
-	transition: height var(--transition-smooth);
-}
-
 .nav-link-container:hover {
 	color: var(--text-primary);
 	background-color: rgba(63, 193, 201, 0.08);
@@ -383,10 +370,6 @@ a:hover {
 	backdrop-filter: blur(10px);
 	border-color: var(--border-highlight);
 	box-shadow: var(--shadow-inner);
-}
-
-.nav-link-container.current::before {
-	height: 60%;
 }
 
 .nav-link-image {

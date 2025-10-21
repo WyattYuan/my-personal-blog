@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
@@ -70,26 +69,24 @@ const posts = (await getCollection("blog")).sort(
       }
 
       .resource-items {
-        grid-column-gap: 64px;
-        grid-row-gap: 64px;
+        grid-column-gap: 0;
+        grid-row-gap: 0;
         flex-direction: column;
         display: flex;
       }
 
+      /* Clean List Style */
       .single-item {
         font-size: 16px;
-        background: var(--glass-bg);
-        backdrop-filter: blur(var(--blur-amount)) saturate(var(--blur-saturate));
-        -webkit-backdrop-filter: blur(var(--blur-amount))
-          saturate(var(--blur-saturate));
-        border-radius: var(--border-radius-xl);
-        padding: 2rem;
-        border: 1px solid var(--glass-border);
-        transition: all var(--transition-smooth);
-        box-shadow: var(--shadow-md);
+        background: transparent;
+        border-radius: 0;
+        padding: 1.5rem 0;
+        border: none;
+        border-bottom: 1px solid var(--border-primary);
+        transition: all var(--transition-elegant);
         position: relative;
-        overflow: hidden;
         animation: slideIn 0.5s var(--transition-elegant) backwards;
+        overflow: visible;
       }
 
       @keyframes slideIn {
@@ -117,181 +114,80 @@ const posts = (await getCollection("blog")).sort(
         animation-delay: 0.4s;
       }
 
-      /* macOS Window Controls Decoration */
+      /* Elegant hover effect */
       .single-item::before {
         content: "";
         position: absolute;
-        top: 1.5rem;
-        left: 1.5rem;
-        width: 12px;
-        height: 12px;
-        background: var(--window-red);
-        border-radius: 50%;
-        box-shadow:
-          20px 0 0 var(--window-yellow),
-          40px 0 0 var(--window-green);
-        opacity: 0;
-        transition: opacity var(--transition-smooth);
-        z-index: 10;
+        left: -1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 0;
+        background: linear-gradient(
+          180deg,
+          var(--accent-secondary),
+          var(--accent)
+        );
+        border-radius: 2px;
+        transition: height var(--transition-elegant);
       }
 
       .single-item:hover::before {
-        opacity: 0.8;
+        height: 60%;
       }
 
       .single-item:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: var(--shadow-xl);
-        border-color: var(--border-secondary);
+        padding-left: 1rem;
+        background: linear-gradient(
+          90deg,
+          rgba(63, 193, 201, 0.03) 0%,
+          transparent 100%
+        );
       }
 
       .single-item a {
         text-decoration: none;
         color: inherit;
-        display: block;
-      }
-
-      .single-item h3 {
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-        font-size: 24px;
-        transition: color var(--transition-smooth);
-      }
-
-      .single-item:hover h3 {
-        color: var(--accent);
-        transform: translateX(4px);
-      }
-
-      .post-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: var(--border-radius-lg);
-        margin-bottom: 1.5rem;
-        transition: transform var(--transition-elegant);
-      }
-
-      .single-item:hover .post-image {
-        transform: scale(1.05);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
       }
 
       .post-meta {
         display: flex;
         align-items: center;
         gap: 1rem;
-        margin-bottom: 1rem;
+        order: -1;
       }
 
       .post-date {
-        color: var(--text-secondary);
+        color: var(--text-muted);
         font-family: "IBM Plex Mono", sans-serif;
-        font-size: 12px;
+        font-size: 11px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
+        font-weight: 500;
+      }
+
+      .single-item h3 {
+        color: var(--text-primary);
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        transition: all var(--transition-elegant);
+        line-height: 1.4;
+      }
+
+      .single-item:hover h3 {
+        color: var(--accent);
+        transform: translateX(8px);
       }
 
       .post-description {
         color: var(--text-secondary);
-        line-height: 24px;
-        margin-bottom: 1.5rem;
-      }
-
-      .post-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-
-      .post-tag {
-        background: var(--chip-bg);
-        backdrop-filter: blur(10px);
-        color: var(--chip-text);
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-family: "IBM Plex Mono", sans-serif;
-        font-size: 10px;
-        text-transform: uppercase;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        transition: all var(--transition-smooth);
-      }
-
-      .post-tag:hover {
-        background: var(--accent-light);
-        border-color: var(--accent);
-        transform: translateY(-2px);
-      }
-
-      /* Featured Post with macOS Glow */
-      .featured-post {
-        background: linear-gradient(
-          135deg,
-          rgba(252, 81, 133, 0.12),
-          rgba(63, 193, 201, 0.08)
-        );
-        border: 1.5px solid var(--accent-secondary);
-        position: relative;
-        box-shadow:
-          var(--shadow-lg),
-          0 0 40px rgba(252, 81, 133, 0.15);
-      }
-
-      .featured-post::before {
-        content: "";
-        position: absolute;
-        top: 1.5rem;
-        left: 1.5rem;
-        width: 12px;
-        height: 12px;
-        background: var(--window-red);
-        border-radius: 50%;
-        box-shadow:
-          20px 0 0 var(--window-yellow),
-          40px 0 0 var(--window-green);
-        opacity: 1;
-        z-index: 10;
-      }
-
-      .featured-post::after {
-        content: "FEATURED";
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        background: var(--accent-secondary);
-        color: #ffffff;
-        padding: 0.35rem 0.85rem;
-        font-size: 10px;
-        font-weight: 600;
-        letter-spacing: 1.5px;
-        border-radius: 20px;
-        box-shadow: 0 4px 12px rgba(252, 81, 133, 0.35);
-        animation: pulse 2s infinite;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          box-shadow: 0 4px 12px rgba(252, 81, 133, 0.35);
-        }
-        50% {
-          box-shadow: 0 4px 20px rgba(252, 81, 133, 0.5);
-        }
-      }
-
-      .featured-post .post-image {
-        height: 280px;
-      }
-
-      .featured-post h3 {
-        font-size: 28px;
-        background: linear-gradient(
-          135deg,
-          var(--accent-secondary) 0%,
-          var(--accent) 100%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        line-height: 1.6;
+        font-size: 14px;
+        margin: 0;
       }
     </style>
   </head>
@@ -315,20 +211,9 @@ const posts = (await getCollection("blog")).sort(
             <section class="items-container">
               <div class="resource-items">
                 {
-                  posts.map((post, index) => (
-                    <div
-                      class={`single-item ${index === 0 ? "featured-post" : ""}`}
-                    >
+                  posts.map((post) => (
+                    <div class="single-item">
                       <a href={`/blog/${post.id}/`}>
-                        {post.data.heroImage && (
-                          <Image
-                            class="post-image"
-                            width={720}
-                            height={360}
-                            src={post.data.heroImage}
-                            alt=""
-                          />
-                        )}
                         <div class="post-meta">
                           <div class="post-date">
                             <FormattedDate date={post.data.pubDate} />
@@ -338,13 +223,6 @@ const posts = (await getCollection("blog")).sort(
                         <div class="post-description">
                           {post.data.description}
                         </div>
-                        {post.data.tags && post.data.tags.length > 0 && (
-                          <div class="post-tags">
-                            {post.data.tags.map((tag) => (
-                              <div class="post-tag">{tag}</div>
-                            ))}
-                          </div>
-                        )}
                       </a>
                     </div>
                   ))
