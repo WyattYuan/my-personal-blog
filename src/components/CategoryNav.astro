@@ -1,0 +1,130 @@
+---
+import { getAllCategories, getCategoryCounts } from "../utils/categories";
+
+const categories = await getAllCategories();
+const categoryCounts = await getCategoryCounts();
+---
+
+<nav class="category-nav">
+    <div class="category-nav-title">分类导航</div>
+    <div class="category-links">
+        <a href="/blog" class="category-link all-posts">
+            <span class="category-icon">📚</span>
+            <span class="category-name">全部文章</span>
+        </a>
+        {
+            categories.map((category) => (
+                <a
+                    href={`/blog/category/${category.slug}`}
+                    class="category-link"
+                >
+                    <span class="category-icon">{category.icon}</span>
+                    <span class="category-name">{category.displayName}</span>
+                    <span class="category-badge">
+                        {categoryCounts.get(category.slug) || 0}
+                    </span>
+                </a>
+            ))
+        }
+    </div>
+</nav>
+
+<style>
+    .category-nav {
+        margin-bottom: 2rem;
+        animation: slideInLeft 0.6s var(--transition-elegant) backwards;
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .category-nav-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+
+    .category-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .category-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius-lg);
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all var(--transition-smooth);
+        font-size: 0.9rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .category-link:hover {
+        background: var(--accent-light);
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(63, 193, 201, 0.2);
+    }
+
+    .category-link.all-posts {
+        background: linear-gradient(
+            135deg,
+            var(--accent-light) 0%,
+            var(--glass-bg) 100%
+        );
+        border-color: var(--accent);
+        font-weight: 500;
+    }
+
+    .category-icon {
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+
+    .category-name {
+        font-weight: 500;
+    }
+
+    .category-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 1.5rem;
+        height: 1.5rem;
+        padding: 0 0.4rem;
+        background: var(--accent);
+        color: white;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        .category-links {
+            gap: 0.5rem;
+        }
+
+        .category-link {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+        }
+    }
+</style>

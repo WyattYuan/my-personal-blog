@@ -2,7 +2,7 @@
 title: 'MIMIC-III 数据预处理详细讲解文档'
 description: ''
 pubDate: '2025-09-12'
-heroImage: '../../assets/blog-placeholder-1.jpg'
+heroImage: '../../../../assets/blog-placeholder-1.jpg'
 tags: ['MIMIC-III', '数据预处理', '机器学习', '医疗数据']
 ---
 # MIMIC-III 数据预处理详细讲解文档

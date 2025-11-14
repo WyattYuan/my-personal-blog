@@ -3,11 +3,16 @@ import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
+import CategoryNav from "../../components/CategoryNav.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import {
+  getPostsByCategory,
+  getCategoryInfo,
+  getAllCategories,
+} from "../../utils/categories";
 
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const postsByCategory = await getPostsByCategory();
+const allCategories = await getAllCategories();
 ---
 
 <!doctype html>
@@ -189,6 +194,69 @@ const posts = (await getCollection("blog")).sort(
         font-size: 14px;
         margin: 0;
       }
+
+      /* Category Section Styles */
+      .category-section {
+        margin-bottom: 3rem;
+        animation: fadeInUp 0.6s var(--transition-elegant) backwards;
+      }
+
+      .category-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid var(--accent);
+      }
+
+      .category-icon {
+        font-size: 1.5rem;
+      }
+
+      .category-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+      }
+
+      .category-count {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-left: 0.5rem;
+      }
+
+      .category-description {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .category-section:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .category-section:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .category-section:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .category-section:nth-child(4) {
+        animation-delay: 0.4s;
+      }
     </style>
   </head>
   <body>
@@ -208,26 +276,52 @@ const posts = (await getCollection("blog")).sort(
           </div>
           <div class="content-container">
             <h1>博客文章</h1>
+            <CategoryNav />
             <section class="items-container">
-              <div class="resource-items">
-                {
-                  posts.map((post) => (
-                    <div class="single-item">
-                      <a href={`/blog/${post.id}/`}>
-                        <div class="post-meta">
-                          <div class="post-date">
-                            <FormattedDate date={post.data.pubDate} />
+              {
+                Array.from(postsByCategory.entries()).map(
+                  ([categorySlug, posts]) => {
+                    const categoryInfo = getCategoryInfo(categorySlug);
+                    return (
+                      <div class="category-section">
+                        <div class="category-header">
+                          <span class="category-icon">{categoryInfo.icon}</span>
+                          <div>
+                            <h2 class="category-title">
+                              {categoryInfo.displayName}
+                              <span class="category-count">
+                                ({posts.length})
+                              </span>
+                            </h2>
+                            {categoryInfo.description && (
+                              <p class="category-description">
+                                {categoryInfo.description}
+                              </p>
+                            )}
                           </div>
                         </div>
-                        <h3>{post.data.title}</h3>
-                        <div class="post-description">
-                          {post.data.description}
+                        <div class="resource-items">
+                          {posts.map((post) => (
+                            <div class="single-item">
+                              <a href={`/blog/${post.id}/`}>
+                                <div class="post-meta">
+                                  <div class="post-date">
+                                    <FormattedDate date={post.data.pubDate} />
+                                  </div>
+                                </div>
+                                <h3>{post.data.title}</h3>
+                                <div class="post-description">
+                                  {post.data.description}
+                                </div>
+                              </a>
+                            </div>
+                          ))}
                         </div>
-                      </a>
-                    </div>
-                  ))
-                }
-              </div>
+                      </div>
+                    );
+                  },
+                )
+              }
             </section>
           </div>
         </div>

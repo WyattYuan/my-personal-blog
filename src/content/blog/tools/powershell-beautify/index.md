@@ -2,7 +2,7 @@
 title: '美化 PowerShell 终端：打造高效且赏心悦目的命令行环境'
 description: '在现代开发中，命令行终端不仅是执行任务的工具，更是开发者日常工作的重要伙伴。一个美观且功能强大的终端环境可以显著提升工作效率和用户体验。本文将介绍如何通过安装和配置一系列工具，来美化你的 PowerShell 终端，使其既高效又赏心悦目。'
 pubDate: '2025-09-12'
-heroImage: '../../assets/blog-placeholder-1.jpg'
+heroImage: '../../../../assets/blog-placeholder-1.jpg'
 tags: ['PowerShell', '终端美化', '开发工具', 'Windows']
 ---
 
@@ -29,7 +29,7 @@ tags: ['PowerShell', '终端美化', '开发工具', 'Windows']
 
 ### 1. 字体
 
-一开始我没注意字体，结果主题装好后全是方块和乱码，查了半天才发现是 Nerd Font 没装对。
+避免出现方块和乱码
 
 - 推荐 [Caskaydia Cove Nerd Font](https://www.nerdfonts.com/font-downloads)，兼容性最好。
 - 下载后解压，右键所有字体文件“为所有用户安装”。
@@ -56,7 +56,6 @@ notepad $PROFILE
 粘贴如下内容（主题名可换成你喜欢的）：
 
 ```powershell
-# 初始化 Oh My Posh 主题引擎
 oh-my-posh init pwsh --config '$env:POSH_THEMES_PATH/jandedobbeleer.omp.json' | Invoke-Expression
 ```
 
@@ -68,16 +67,10 @@ oh-my-posh init pwsh --config '$env:POSH_THEMES_PATH/jandedobbeleer.omp.json' | 
 
 这时应该能看到全新的提示符了！
 
-### 4. 换主题玩花样
+### 4. 换主题
 
 Oh My Posh 主题库非常丰富：[主题库地址](https://ohmyposh.dev/docs/themes#catppuccin)
 
 挑喜欢的主题，把 profile 里的 `jandedobbeleer.omp.json` 换成对应主题名，保存并重载即可。
 
 ---
-
-## 我的感受 & 总结
-
-折腾完之后，PowerShell 终于有了现代终端的感觉，颜值和效率都提升了。最容易踩坑的就是字体，建议一定先搞定字体再装主题。
-
-如果你也想让终端变得更好用、更好看，不妨试试这套方案！有问题欢迎留言交流～

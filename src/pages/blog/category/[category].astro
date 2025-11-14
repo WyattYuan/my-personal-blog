@@ -1,0 +1,328 @@
+---
+import { type CollectionEntry } from "astro:content";
+import BaseHead from "../../../components/BaseHead.astro";
+import FormattedDate from "../../../components/FormattedDate.astro";
+import Header from "../../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../../consts";
+import {
+    getAllCategories,
+    getPostsInCategory,
+    getCategoryInfo,
+} from "../../../utils/categories";
+
+export async function getStaticPaths() {
+    const categories = await getAllCategories();
+    return categories.map((category) => ({
+        params: { category: category.slug },
+    }));
+}
+
+const { category } = Astro.params;
+const posts = await getPostsInCategory(category);
+const categoryInfo = getCategoryInfo(category);
+---
+
+<!doctype html>
+<html lang="cn">
+    <head>
+        <BaseHead
+            title={`${categoryInfo.displayName} | ${SITE_TITLE}`}
+            description={categoryInfo.description || SITE_DESCRIPTION}
+        />
+        <style>
+            /* Blog List Specific Styles */
+            .back-nav-container {
+                color: var(--text-primary);
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                align-items: center;
+                padding-bottom: 0;
+                font-weight: 500;
+                display: flex;
+                margin-bottom: 2rem;
+            }
+
+            .back-nav-button {
+                color: var(--text-primary);
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                border: 1px solid var(--glass-border);
+                border-radius: var(--border-radius-lg);
+                margin-top: -12px;
+                padding: 12px 16px;
+                text-decoration: none;
+                transition: all var(--transition-smooth);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                box-shadow: var(--shadow-sm);
+            }
+
+            .back-nav-button:hover {
+                background: var(--accent-light);
+                border-color: var(--accent);
+                transform: translateX(-4px);
+                box-shadow: 0 4px 16px rgba(63, 193, 201, 0.2);
+            }
+
+            .back-nav-img {
+                width: 18px;
+            }
+
+            .content-container {
+                grid-column-gap: 32px;
+                grid-row-gap: 32px;
+                flex-direction: column;
+                display: flex;
+            }
+
+            .items-container {
+                flex-direction: column;
+            }
+
+            .resource-items {
+                grid-column-gap: 0;
+                grid-row-gap: 0;
+                flex-direction: column;
+                display: flex;
+            }
+
+            /* Category Header */
+            .category-header {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 2rem;
+                padding: 1.5rem;
+                background: linear-gradient(
+                    135deg,
+                    rgba(63, 193, 201, 0.1) 0%,
+                    transparent 100%
+                );
+                border-left: 4px solid var(--accent);
+                border-radius: var(--border-radius-md);
+            }
+
+            .category-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-info h1 {
+                margin: 0;
+                color: var(--text-primary);
+            }
+
+            .category-description {
+                color: var(--text-secondary);
+                margin: 0.25rem 0 0 0;
+                font-size: 0.95rem;
+            }
+
+            .post-count {
+                color: var(--text-muted);
+                font-size: 0.875rem;
+                margin-top: 0.5rem;
+            }
+
+            /* Clean List Style */
+            .single-item {
+                font-size: 16px;
+                background: transparent;
+                border-radius: 0;
+                padding: 1.5rem 0;
+                border: none;
+                border-bottom: 1px solid var(--border-primary);
+                transition: all var(--transition-elegant);
+                position: relative;
+                animation: slideIn 0.5s var(--transition-elegant) backwards;
+                overflow: visible;
+            }
+
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Stagger animation for multiple items */
+            .single-item:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+            .single-item:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            .single-item:nth-child(3) {
+                animation-delay: 0.3s;
+            }
+            .single-item:nth-child(4) {
+                animation-delay: 0.4s;
+            }
+
+            /* Elegant hover effect */
+            .single-item::before {
+                content: "";
+                position: absolute;
+                left: -1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 4px;
+                height: 0;
+                background: linear-gradient(
+                    180deg,
+                    var(--accent-secondary),
+                    var(--accent)
+                );
+                border-radius: 2px;
+                transition: height var(--transition-elegant);
+            }
+
+            .single-item:hover::before {
+                height: 60%;
+            }
+
+            .single-item:hover {
+                padding-left: 1rem;
+                background: linear-gradient(
+                    90deg,
+                    rgba(63, 193, 201, 0.03) 0%,
+                    transparent 100%
+                );
+            }
+
+            .single-item a {
+                text-decoration: none;
+                color: inherit;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .post-meta {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                order: -1;
+            }
+
+            .post-date {
+                color: var(--text-muted);
+                font-family: "IBM Plex Mono", sans-serif;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: 500;
+            }
+
+            .single-item h3 {
+                color: var(--text-primary);
+                margin: 0;
+                font-size: 20px;
+                font-weight: 500;
+                transition: all var(--transition-elegant);
+                line-height: 1.4;
+            }
+
+            .single-item:hover h3 {
+                color: var(--accent);
+                transform: translateX(8px);
+            }
+
+            .post-description {
+                color: var(--text-secondary);
+                line-height: 1.6;
+                font-size: 14px;
+                margin: 0;
+            }
+
+            .empty-state {
+                text-align: center;
+                padding: 3rem 1rem;
+                color: var(--text-muted);
+            }
+
+            .empty-state-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <Header selectedItem="blog" />
+            <nav class="main">
+                <div class="container">
+                    <div class="back-nav-container">
+                        <a href="/blog" class="back-nav-button">
+                            <svg
+                                class="back-nav-img"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+                                ></path>
+                            </svg>
+                            <div>返回博客</div>
+                        </a>
+                    </div>
+                    <div class="content-container">
+                        <div class="category-header">
+                            <span class="category-icon"
+                                >{categoryInfo.icon}</span
+                            >
+                            <div class="category-info">
+                                <h1>{categoryInfo.displayName}</h1>
+                                {
+                                    categoryInfo.description && (
+                                        <p class="category-description">
+                                            {categoryInfo.description}
+                                        </p>
+                                    )
+                                }
+                                <p class="post-count">{posts.length} 篇文章</p>
+                            </div>
+                        </div>
+                        <section class="items-container">
+                            {
+                                posts.length === 0 ? (
+                                    <div class="empty-state">
+                                        <div class="empty-state-icon">📭</div>
+                                        <p>该分类下暂无文章</p>
+                                    </div>
+                                ) : (
+                                    <div class="resource-items">
+                                        {posts.map((post) => (
+                                            <div class="single-item">
+                                                <a href={`/blog/${post.id}/`}>
+                                                    <div class="post-meta">
+                                                        <div class="post-date">
+                                                            <FormattedDate
+                                                                date={
+                                                                    post.data
+                                                                        .pubDate
+                                                                }
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <h3>{post.data.title}</h3>
+                                                    <div class="post-description">
+                                                        {post.data.description}
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )
+                            }
+                        </section>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </body>
+</html>
